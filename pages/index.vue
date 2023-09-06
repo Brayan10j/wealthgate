@@ -32,7 +32,7 @@
                 <span class="heading font-bold text-5xl md:text-6xl lg:text-8xl">MULTIVERSE</span>
             </h1>
 
-            <NuxtLink to="/lands" class="ecosystem-link">
+            <NuxtLink  class="ecosystem-link">
                 <span class="opacity-75">ENTER THE GEO DATA ECOSYSTEM</span>
             </NuxtLink>
         </section>
