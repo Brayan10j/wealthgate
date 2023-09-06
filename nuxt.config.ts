@@ -1,8 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: [
-    'nuxt-vuetify'
-  ],
-
-})
+  modules: ["nuxt-vuetify"],
+  vuetify: {
+    theme: {
+      defaultTheme: "dark",
+    },
+  },
+  //#d1a828
+});

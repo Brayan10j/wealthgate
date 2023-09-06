@@ -1,14 +1,120 @@
 <template>
     <v-app>
+        <v-navigation-drawer v-model="drawer">
+            <v-row align="center" justify="center">
+                <v-col class="ma-5">
+                    <v-row align="center" justify="center">
+                        <v-img src="/icon.png" max-width="50" contain></v-img><span
+                            class="logo-text uppercase">SionLand</span>
+                    </v-row>
+                </v-col>
+            </v-row>
+            <div class="divider"></div>
+
+            <v-list>
+                <v-list-group>
+                    <template v-slot:activator="{ props }">
+                        <v-list-item v-bind="props" prepend-icon="mdi-earth" title="EXPLORE"></v-list-item>
+                    </template>
+                    <v-list-item v-for="(item, i) in itemsExplore" :key="i">
+                        <v-list-item-content>
+                            <v-list-item-title class="list-title">
+                                {{ item.label }}</v-list-item-title>
+                        </v-list-item-content>
+                    </v-list-item>
+                </v-list-group>
+                <v-list-group>
+                    <template v-slot:activator="{ props }">
+                        <v-list-item v-bind="props" prepend-icon="mdi-account-arrow-left" title="RESOURCES"></v-list-item>
+                    </template>
+                    <v-list-item to="/statistics">
+                        <v-list-item-content>
+                            <v-list-item-title class="list-title">
+                                Statistics</v-list-item-title>
+                        </v-list-item-content>
+                    </v-list-item>
+                    <v-list-item to="/oracle">
+                        <v-list-item-content>
+                            <v-list-item-title class="list-title">
+                                Substratum node</v-list-item-title>
+                        </v-list-item-content>
+                    </v-list-item>
+                    <v-list-item href="https://sionland.io/blog/" target="_blank">
+                        <v-list-item-content>
+                            <v-list-item-title class="list-title"> Blog</v-list-item-title>
+                        </v-list-item-content>
+                    </v-list-item>
+                    <v-list-item href="https://sionland.io/contact-us/" target="_blank">
+                        <v-list-item-content>
+                            <v-list-item-title class="list-title">
+                                Contact</v-list-item-title>
+                        </v-list-item-content>
+                    </v-list-item>
+                </v-list-group>
+                <v-list-group no-action color="gray">
+                    <template v-slot:activator="{ props }">
+                        <v-list-item v-bind="props" prepend-icon="mdi-file" title="DOCS"></v-list-item>
+                    </template>
+                    <v-list-item href="https://sionland.gitbook.io/whitepaper-en/" target="_blank">
+                        <v-list-item-content>
+                            <v-list-item-title class="list-title">
+                                Whitepaper</v-list-item-title>
+                        </v-list-item-content>
+                    </v-list-item>
+                    <v-list-item to="/devs">
+                        <v-list-item-content>
+                            <v-list-item-title class="list-title">
+                                Developers</v-list-item-title>
+                        </v-list-item-content>
+                    </v-list-item>
+                </v-list-group>
+            </v-list>
+        </v-navigation-drawer>
+
         <v-app-bar>
             <v-app-bar-nav-icon @click.stop="drawer = !drawer"> </v-app-bar-nav-icon>
             <v-spacer />
+            <v-btn v-show="!loged" color="#d1a828">
+                <v-icon class="pr-2"> mdi-earth </v-icon>
+                LOGIN
+            </v-btn>
+            <v-menu bottom min-width="200px" rounded offset-y>
+                <template v-slot:activator="{ on }">
+                    <v-btn v-show="loged" icon x-large small v-on="on">
+                        <v-avatar color="transparent">
+                            <v-icon> mdi-account-circle </v-icon>
+                        </v-avatar>
+                    </v-btn>
+                </template>
+                <v-card>
+                    <v-list-item-content class="justify-center">
+                        <div class="mx-auto text-center">
+                            <v-avatar color="transparent">
+                                <v-icon> mdi-account-circle </v-icon>
+                            </v-avatar>
+                            <!--  <p class="text-caption mt-1" v-if="loged">
+                                {{
+                                    $store.state.userInfo.address.slice(0, 5) +
+                                    "..." +
+                                    $store.state.userInfo.address.slice(-3)
+                                }}
+                            </p> -->
+                            <!-- <v-chip color="#bc1fdb" v-if="$store.state.userInfo">
+                {{ $store.state.userInfo.pass.name }}
+              </v-chip> -->
+                            <v-divider class="my-3"></v-divider>
+                            <v-btn depressed rounded text to="/myLands"> Lands </v-btn>
+                            <v-divider class="my-3"></v-divider>
+                            <v-btn depressed rounded text to="/collectibles">
+                                Collectibles
+                            </v-btn>
+                            <v-divider class="my-3"></v-divider>
+                            <v-btn depressed rounded text @click="logout"> Disconnect </v-btn>
+                        </div>
+                    </v-list-item-content>
+                </v-card>
+            </v-menu>
         </v-app-bar>
-        <v-navigation-drawer v-model="drawer">
-            <v-list>
-                <v-list-item title="Navigation drawer"></v-list-item>
-            </v-list>
-        </v-navigation-drawer>
 
 
 
@@ -22,4 +128,39 @@
 <script setup>
 
 const drawer = ref(false)
+const loged = ref(false)
+
+
+const itemsExplore = ref([
+    { label: "Explore map", to: "/lands" },
+    { label: "My lands", to: "/myLands" },
+    { label: "Collectibles", to: "/collectibles" },
+    { label: "Marketplace", to: "/marketplace" },
+    { label: "Statistics", to: "/statistics" },
+])
+
+
 </script>
+
+<style scoped lang="scss" >
+.logo-text {
+    font-family: "Ailenrons";
+    font-size: 30px;
+}
+
+.divider {
+    animation: 2s ease-in-out fadeIn;
+    transition: 0.2s ease-out;
+    height: 1px;
+    background: linear-gradient(to right,
+            rgba(0, 0, 0, 0),
+            rgba(255, 255, 255, 50),
+            rgba(0, 0, 0, 0));
+    margin-bottom: 1.5rem;
+}
+
+.list-title {
+    font-family: "Mulish", sans-serif;
+    white-space: nowrap;
+}
+</style>
