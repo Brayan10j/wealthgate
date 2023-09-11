@@ -1,6 +1,6 @@
 <template>
     <v-app>
-        <v-navigation-drawer v-model="drawer">
+        <v-navigation-drawer v-model="drawer" class="nav">
             <v-row align="center" justify="center">
                 <v-col class="ma-5">
                     <v-row align="center" justify="center">
@@ -71,10 +71,10 @@
             </v-list>
         </v-navigation-drawer>
 
-        <v-app-bar>
+        <v-app-bar color="transparent" flat>
             <v-app-bar-nav-icon @click.stop="drawer = !drawer"> </v-app-bar-nav-icon>
             <v-spacer />
-            <v-btn v-show="!loged" color="#d1a828" @click="login()">
+            <v-btn v-show="!loged"  @click="login()">
                 <v-icon class="pr-2"> mdi-earth </v-icon>
                 LOGIN
             </v-btn>
@@ -157,6 +157,10 @@ async function login() {
 .logo-text {
     font-family: "Ailenrons";
     font-size: 30px;
+}
+
+.nav {
+    background: linear-gradient(188.3deg, #0d0b0e 54.16%, #7c00c6 202.38%);
 }
 
 .divider {

@@ -3,50 +3,46 @@
 </script>
 
 <template>
-    <main>
-        <section>
-            <video autoplay muted loop id="heroVideoBackground">
-                <source src="/videos/backgrounds/home-hero-background.mp4" type="video/mp4" />
-            </video>
+    <v-container class="fill-height">
+        <v-row >
+            <v-col>
+                <div class="base">
+                    <video autoplay muted loop id="heroVideoBackground">
+                        <source src="/videos/backgrounds/home-hero-background.mp4" type="video/mp4" />
+                    </video>
 
-            <div class="branding-logo py-8 mt-8">
-                <img src="/icons/sionland-logo-purple.png" alt="SionLand Logo Purple" />
-                <span class="logo-text ">SionLand</span>
-            </div>
+                    <div class="branding-logo ">
+                        <img src="/icons/sionland-logo-purple.png" alt="SionLand Logo Purple" />
+                        <span class="logo-text ">SionLand</span>
+                    </div>
 
-            <h1 class="
+                    <h1 class="
           catchphrase
-          flex flex-col
-          items-start
-          lg:items-center
-          py-16
-          lg:py-48
           mt-16
           mb-16
+          py-8
         ">
-                <div class="sub-heading ">
-                    <span class="font-bold">DECENTRALIZED GEODATA&nbsp;</span>
-                    <span class="opacity-50 font-thin">FOR</span>
+                        <div class="sub-heading font-weight-bold">
+                            <span>DECENTRALIZED GEODATA&nbsp;</span>
+                            <span class="text-grey ">FOR</span>
+                        </div>
+
+                        <span class="heading font-weight-bold text-h3 text-md-h2 text-lg-h1">MULTIVERSE</span>
+                    </h1>
+
+                    <NuxtLink class="ecosystem-link">
+                        <span class="opacity-75">ENTER THE GEO DATA ECOSYSTEM</span>
+                    </NuxtLink>
                 </div>
-
-                <span class="heading font-bold text-5xl md:text-6xl lg:text-8xl">MULTIVERSE</span>
-            </h1>
-
-            <NuxtLink  class="ecosystem-link">
-                <span class="opacity-75">ENTER THE GEO DATA ECOSYSTEM</span>
-            </NuxtLink>
-        </section>
-    </main>
+            </v-col>
+        </v-row>
+    </v-container>
 </template>
 
 <style scoped lang="scss">
-main {
-    // FIXME: temporary fix
-    overflow-x: hidden;
+.base {
     position: relative;
     z-index: 1;
-    width: 100%;
-    top: 0;
 }
 
 #heroVideoBackground {
@@ -58,17 +54,6 @@ main {
     z-index: -1;
     object-fit: cover;
     opacity: 0.5;
-}
-
-.live-button {
-    margin-left: auto;
-    width: fit-content;
-    border-radius: 1rem;
-    transition: 0.2s ease;
-
-    &:hover {
-        box-shadow: 0px 0px 23px #bc1fdb;
-    }
 }
 
 .background-blur {
@@ -142,27 +127,13 @@ main {
 
     .heading {
         background: linear-gradient(91.11deg, #dd00c7 -2.41%, #5a00cd 125.3%);
-        background-clip: text;
-        text-fill-color: transparent;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-
-        @media (min-width: 1600px) {
-            & {
-                font-size: 200px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            & {
-                font-size: 2.8rem;
-            }
-        }
 
         overflow: hidden;
         border-right: 0.05em solid white;
         animation: typing 2s steps(40, end),
-        blink-caret 0.75s step-end infinite;
+            blink-caret 0.75s step-end infinite;
 
         @keyframes typing {
             from {
@@ -189,12 +160,10 @@ main {
 
     .sub-heading {
         letter-spacing: 0.6rem;
-        color: white;
 
-        @media (min-width: 1400px) {
+        @media (max-width: 1400px) {
             & {
-                font-size: 2rem;
-                letter-spacing: 0.9em;
+                font-size: 1rem;
             }
         }
 
@@ -264,4 +233,5 @@ main {
     .ecosystem-link {
         color: #141414;
     }
-}</style>
+}
+</style>
