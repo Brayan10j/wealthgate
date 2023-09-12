@@ -3,37 +3,36 @@
 </script>
 
 <template>
-    <v-container class="fill-height">
-        <v-row >
+    <v-container class="fill-height base">
+        <v-row>
             <v-col>
-                <div class="base">
-                    <video autoplay muted loop id="heroVideoBackground">
-                        <source src="/videos/backgrounds/home-hero-background.mp4" type="video/mp4" />
-                    </video>
+                <video autoplay muted loop id="heroVideoBackground">
+                    <source src="/videos/backgrounds/home-hero-background.mp4" type="video/mp4" />
+                </video>
 
-                    <div class="branding-logo ">
-                        <img src="/icons/sionland-logo-purple.png" alt="SionLand Logo Purple" />
-                        <span class="logo-text ">SionLand</span>
-                    </div>
+                <div class="branding-logo ">
+                    <img src="/icons/sionland-logo-purple.png" alt="SionLand Logo Purple" />
+                    <span class="logo-text ">SionLand</span>
+                </div>
 
-                    <h1 class="
+                <h1 class="
           catchphrase
           mt-16
           mb-16
           py-8
         ">
-                        <div class="sub-heading font-weight-bold">
-                            <span>DECENTRALIZED GEODATA&nbsp;</span>
-                            <span class="text-grey ">FOR</span>
-                        </div>
+                    <div class="sub-heading font-weight-bold">
+                        <span>DECENTRALIZED GEODATA&nbsp;</span>
+                        <span class="text-grey ">FOR</span>
+                    </div>
 
-                        <span class="heading font-weight-bold text-h3 text-md-h2 text-lg-h1">MULTIVERSE</span>
-                    </h1>
+                    <span class="heading font-weight-bold text-h3 text-md-h2 text-lg-h1">MULTIVERSE</span>
+                </h1>
 
-                    <NuxtLink class="ecosystem-link">
-                        <span class="opacity-75">ENTER THE GEO DATA ECOSYSTEM</span>
-                    </NuxtLink>
-                </div>
+                <NuxtLink class="ecosystem-link">
+                    <span class="opacity-75">ENTER THE GEO DATA ECOSYSTEM</span>
+                </NuxtLink>
+
             </v-col>
         </v-row>
     </v-container>
