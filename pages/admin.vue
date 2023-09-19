@@ -34,9 +34,10 @@
                     <tbody>
                         <tr v-for="item in chats" :key="item.username">
                             <td>{{ item.username }}</td>
-                            <td><v-btn size="small" v-if="item.access" color="red"
+                            <td><v-btn v-if="item.access" size="small" color="red"
                                     @click="changeAccess(item.username, false)"> deny </v-btn> <v-btn v-else
-                                    @click="changeAccess(item.username, true)" color="green"> allow </v-btn> </td>
+                                    @click="changeAccess(item.username, true)" size="small" color="green"> allow </v-btn>
+                            </td>
                             <td>{{ item.requests }}</td>
                         </tr>
                     </tbody>
