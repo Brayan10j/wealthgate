@@ -37,7 +37,6 @@
                             <td><v-checkbox v-model="item.access"></v-checkbox></td>
                             <td>{{ item.requests }}</td>
                         </tr>
-                        <Fieldset:d></Fieldset:d>
                     </tbody>
                 </v-table>
             </v-col>
