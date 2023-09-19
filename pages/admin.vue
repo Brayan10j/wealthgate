@@ -21,7 +21,7 @@
                     <thead>
                         <tr>
                             <th class="text-left">
-                                ChatID
+                                Username
                             </th>
                             <th class="text-left">
                                 Access
@@ -34,7 +34,9 @@
                     <tbody>
                         <tr v-for="item in chats" :key="item.username">
                             <td>{{ item.username }}</td>
-                            <td><v-checkbox v-model="item.access"></v-checkbox></td>
+                            <td><v-btn size="small" v-if="item.access" color="red"
+                                    @click="changeAccess(item.username, false)"> deny </v-btn> <v-btn v-else
+                                    @click="changeAccess(item.username, true)" color="green"> allow </v-btn> </td>
                             <td>{{ item.requests }}</td>
                         </tr>
                     </tbody>
@@ -52,6 +54,17 @@ const supabase = useSupabaseClient()
 
 const username = ref("")
 const access = ref(false)
+const chats = ref([])
+
+
+async function updateTable() {
+    let { data, error } = await supabase
+        .from('chats')
+        .select('*')
+
+    chats.value = data
+
+}
 
 
 async function giveAccess() {
@@ -63,14 +76,26 @@ async function giveAccess() {
         ])
         .select()
     if (error) alert(error.details)
+    updateTable()
 
 
 }
 
+async function changeAccess(username, access) {
 
-let { data: chats, error } = await supabase
-    .from('chats')
-    .select('*')
+    const { data, error } = await supabase
+        .from('chats')
+        .upsert([
+            { username: username, access: access },
+        ])
+        .select()
+    if (error) alert(error.details)
+    updateTable()
+
+}
+
+
+updateTable()
 
 
 </script> 
