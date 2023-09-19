@@ -4,12 +4,12 @@
             <v-col>
                 <v-card>
                     <v-card-text>
-                        <v-text-field label="Username">
+                        <v-text-field v-model="username" label="Username">
 
                         </v-text-field>
-                        <v-checkbox label="Access"></v-checkbox>
+                        <v-checkbox label="Access" v-model="access"></v-checkbox>
 
-                        <v-btn> Send </v-btn>
+                        <v-btn @click="giveAccess()"> Send </v-btn>
                     </v-card-text>
                 </v-card>
             </v-col>
@@ -32,8 +32,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="item in chats" :key="item.id">
-                            <td>{{ item.id }}</td>
+                        <tr v-for="item in chats" :key="item.username">
+                            <td>{{ item.username }}</td>
                             <td><v-checkbox v-model="item.access"></v-checkbox></td>
                             <td>{{ item.requests }}</td>
                         </tr>
@@ -49,6 +49,23 @@
 <script setup>
 
 const supabase = useSupabaseClient()
+
+const username = ref("")
+const access = ref(false)
+
+
+async function giveAccess() {
+
+    const { data, error } = await supabase
+        .from('chats')
+        .insert([
+            { username: username.value, access: access.value },
+        ])
+        .select()
+    if (error) alert(error.details)
+
+
+}
 
 
 let { data: chats, error } = await supabase
