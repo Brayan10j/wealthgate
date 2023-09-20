@@ -29,6 +29,9 @@
                             <th class="text-left">
                                 Requests
                             </th>
+                            <th class="text-left">
+                                Actions
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,6 +42,7 @@
                                     @click="changeAccess(item.username, true)" size="small" color="green"> allow </v-btn>
                             </td>
                             <td>{{ item.requests }}</td>
+                            <td><v-btn icon="mdi-delete" color="red" size="x-small" @click="deleteUser(item.username)"></v-btn></td>
                         </tr>
                     </tbody>
                 </v-table>
@@ -57,11 +61,22 @@ const username = ref("")
 const access = ref(false)
 const chats = ref([])
 
+async function deleteUser(username) {
+    const { error } = await supabase
+        .from('chats')
+        .delete()
+        .eq('username', username)
+        if (error) alert(error.details)
+        updateTable()
+
+}
+
 
 async function updateTable() {
     let { data, error } = await supabase
         .from('chats')
         .select('*')
+    
 
     chats.value = data
 
